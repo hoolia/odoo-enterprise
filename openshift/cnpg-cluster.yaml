@@ -1,0 +1,38 @@
+# CloudNativePG (CNPG) PostgreSQL cluster.
+# Requires the CNPG operator to be installed on the cluster.
+# Creates:
+#   - A single-instance Postgres 16 cluster
+#   - Service "postgres-rw" (read-write endpoint)
+#   - Secret "postgres-app" with connection credentials
+#
+# The Odoo deployment references these resources automatically.
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres
+  labels:
+    app.kubernetes.io/name: odoo
+    app.kubernetes.io/instance: odoo
+    app.kubernetes.io/component: database
+spec:
+  instances: 1
+  postgresql:
+    parameters:
+      max_connections: "200"
+      shared_buffers: 256MB
+      effective_cache_size: 768MB
+      maintenance_work_mem: 128MB
+      work_mem: 4MB
+  bootstrap:
+    initdb:
+      database: odoo
+      owner: odoo
+  storage:
+    size: 10Gi
+  resources:
+    requests:
+      cpu: 500m
+      memory: 1Gi
+    limits:
+      cpu: "1"
+      memory: 2Gi

@@ -1,0 +1,25 @@
+# OpenShift Route — exposes Odoo externally.
+# By default, host is auto-generated as:
+#   odoo-<namespace>.apps.<cluster-domain>
+# Override spec.host to use a custom domain.
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: odoo
+  labels:
+    app.kubernetes.io/name: odoo
+    app.kubernetes.io/instance: odoo
+    app.kubernetes.io/component: server
+spec:
+  # Leave host empty for auto-generated subdomain:
+  #   odoo-<namespace>.apps.<cluster-domain>
+  # Or set explicitly, e.g.: host: odoo.example.com
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  to:
+    kind: Service
+    name: odoo
+    weight: 100
+  port:
+    targetPort: http

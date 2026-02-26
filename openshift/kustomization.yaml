@@ -1,0 +1,30 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: odoo
+
+resources:
+  - serviceaccount.yaml
+  - scc-rolebinding.yaml
+  - pvc.yaml
+  - cnpg-cluster.yaml
+  - imagestream.yaml
+  - buildconfig.yaml
+  - deployment.yaml
+  - service.yaml
+  - route.yaml
+
+# Odoo admin password — replaced at deploy time by deploy.sh
+# with a randomly generated value. The placeholder below is only
+# used if you run `oc apply -k openshift/` directly.
+secretGenerator:
+  - name: odoo
+    literals:
+      - odoo-password=changeme
+
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    app.kubernetes.io/name: odoo
+    app.kubernetes.io/instance: odoo
+    app.kubernetes.io/component: server

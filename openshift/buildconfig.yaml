@@ -2,15 +2,16 @@ apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
   name: odoo-enterprise
-  namespace: grncloud-odoo
   labels:
     app.kubernetes.io/name: odoo
     app.kubernetes.io/instance: odoo
     app.kubernetes.io/component: enterprise-build
 spec:
   source:
-    type: Binary
-    binary: {}
+    type: Git
+    git:
+      uri: https://github.com/hoolia/odoo-enterprise.git
+      ref: main
   strategy:
     type: Docker
     dockerStrategy:

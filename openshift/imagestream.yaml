@@ -2,7 +2,6 @@ apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
   name: odoo-enterprise
-  namespace: grncloud-odoo
   labels:
     app.kubernetes.io/name: odoo
     app.kubernetes.io/instance: odoo
