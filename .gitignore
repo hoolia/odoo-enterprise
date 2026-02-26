@@ -1,0 +1,4 @@
+# Odoo enterprise/community source packages (too large for git)
+*.tar.gz
+*.deb
+*.rpm

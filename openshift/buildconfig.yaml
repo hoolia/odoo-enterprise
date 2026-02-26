@@ -1,0 +1,28 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: odoo-enterprise
+  namespace: grncloud-odoo
+  labels:
+    app.kubernetes.io/name: odoo
+    app.kubernetes.io/instance: odoo
+    app.kubernetes.io/component: enterprise-build
+spec:
+  source:
+    type: Binary
+    binary: {}
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Dockerfile
+  output:
+    to:
+      kind: ImageStreamTag
+      name: odoo-enterprise:latest
+  resources:
+    limits:
+      cpu: "2"
+      memory: 4Gi
+    requests:
+      cpu: "1"
+      memory: 2Gi
