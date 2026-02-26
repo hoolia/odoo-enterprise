@@ -1,7 +1,7 @@
 # CloudNativePG (CNPG) PostgreSQL cluster.
 # Requires the CNPG operator to be installed on the cluster.
 # Creates:
-#   - A single-instance Postgres 16 cluster
+#   - A 3-instance Postgres 16 HA cluster
 #   - Service "postgres-rw" (read-write endpoint)
 #   - Secret "postgres-app" with connection credentials
 #
@@ -27,6 +27,19 @@ spec:
     initdb:
       database: odoo
       owner: odoo
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://cnpg-barman-backups/odoo/
+      endpointURL: https://s3.gra.io.cloud.ovh.net
+      s3Credentials:
+        accessKeyId:
+          key: AWS_ACCESS_KEY_ID
+          name: s3-backup-credentials
+        secretAccessKey:
+          key: AWS_SECRET_ACCESS_KEY
+          name: s3-backup-credentials
+    retentionPolicy: 30d
+    target: prefer-standby
   storage:
     size: 10Gi
   resources:

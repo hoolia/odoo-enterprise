@@ -1,0 +1,15 @@
+# Daily CNPG backup at 01:00 UTC via Barman to S3.
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: postgres-backup
+  labels:
+    app.kubernetes.io/name: odoo
+    app.kubernetes.io/instance: odoo
+    app.kubernetes.io/component: database
+spec:
+  schedule: "0 1 * * *"
+  backupOwnerReference: none
+  method: barmanObjectStore
+  cluster:
+    name: postgres

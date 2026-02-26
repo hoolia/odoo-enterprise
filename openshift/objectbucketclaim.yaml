@@ -1,0 +1,23 @@
+# ObjectBucketClaim — provisions an S3 bucket for CNPG backups.
+# Requires an OBC-compatible operator (e.g. Noobaa, Rook-Ceph OBC).
+#
+# When bound, the operator creates:
+#   - ConfigMap "<obc-name>" with BUCKET_NAME, BUCKET_HOST, BUCKET_PORT
+#   - Secret "<obc-name>" with AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
+#
+# If no OBC provisioner is available, create the s3-backup-credentials
+# secret manually instead:
+#   oc create secret generic s3-backup-credentials \
+#     --from-literal=AWS_ACCESS_KEY_ID='...' \
+#     --from-literal=AWS_SECRET_ACCESS_KEY='...'
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: s3-backup-credentials
+  labels:
+    app.kubernetes.io/name: odoo
+    app.kubernetes.io/instance: odoo
+    app.kubernetes.io/component: backup
+spec:
+  generateBucketName: cnpg-barman-backups
+  storageClassName: openshift-storage.noobaa.io

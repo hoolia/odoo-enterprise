@@ -7,8 +7,11 @@ resources:
   - serviceaccount.yaml
   - scc-rolebinding.yaml
   - secret-odoo.yaml
+  - secret-s3-backup.yaml
+  - objectbucketclaim.yaml
   - pvc.yaml
   - cnpg-cluster.yaml
+  - scheduledbackup.yaml
   - imagestream.yaml
   - buildconfig.yaml
   - deployment.yaml
