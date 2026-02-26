@@ -8,8 +8,10 @@ metadata:
     app.kubernetes.io/component: enterprise-build
 spec:
   source:
-    type: Binary
-    binary: {}
+    type: Git
+    git:
+      uri: https://github.com/hoolia/odoo-enterprise.git
+      ref: main
   strategy:
     type: Docker
     dockerStrategy:
