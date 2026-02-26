@@ -1,4 +1,9 @@
-# Odoo enterprise/community source packages (too large for git)
-*.tar.gz
+# Community packages (not needed — enterprise tarball is committed)
+odoo_19.0.20260224*
+
+# Other binary packages (rpm/deb — Dockerfile uses tarball only)
 *.deb
 *.rpm
+
+# Debug screenshots
+*.png
