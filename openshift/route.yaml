@@ -6,6 +6,10 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   name: odoo
+  annotations:
+    cert-manager.io/issuer-kind: ClusterIssuer
+    cert-manager.io/issuer-name: letsencrypt
+    # external-dns.alpha.kubernetes.io/hostname: odoo.example.com
   labels:
     app.kubernetes.io/name: odoo
     app.kubernetes.io/instance: odoo
