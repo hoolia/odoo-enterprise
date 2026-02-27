@@ -27,6 +27,8 @@ spec:
     initdb:
       database: odoo
       owner: odoo
+      postInitSQL:
+        - CREATE EXTENSION IF NOT EXISTS vector
   backup:
     barmanObjectStore:
       destinationPath: s3://cnpg-barman-backups/odoo/
