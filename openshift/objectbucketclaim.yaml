@@ -20,4 +20,4 @@ metadata:
     app.kubernetes.io/component: backup
 spec:
   generateBucketName: cnpg-barman-backups
-  storageClassName: openshift-storage.noobaa.io
+  storageClassName: noobaa-operator.noobaa.io
