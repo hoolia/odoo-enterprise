@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: odoo
+  annotations:
+    image.openshift.io/triggers: |-
+      [{"from":{"kind":"ImageStreamTag","name":"odoo-enterprise:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"odoo\")].image"}]
   labels:
     app.kubernetes.io/name: odoo
     app.kubernetes.io/instance: odoo
