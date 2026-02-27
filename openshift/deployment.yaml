@@ -46,7 +46,7 @@ spec:
               memory: 128Mi
       containers:
         - name: odoo
-          image: image-registry.openshift-image-registry.svc:5000/odoo/odoo-enterprise:latest
+          image: odoo-enterprise:latest
           ports:
             - name: http
               containerPort: 8069
