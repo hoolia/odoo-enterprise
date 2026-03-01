@@ -9,7 +9,11 @@ FROM ghcr.io/open-bitnami/containers/odoo:19
 
 USER root
 
-RUN apt install -y python3-xmlsec
+RUN install_packages build-essential pkg-config libxmlsec1-dev libxmlsec1-openssl
+RUN pip3 install --no-cache-dir \
+    xmlsec \
+    phonenumbers \
+    python-stdnum
 
 COPY odoo_19.0+e.20260224.tar.gz /tmp/enterprise.tar.gz
 
