@@ -9,6 +9,8 @@ FROM ghcr.io/open-bitnami/containers/odoo:19
 
 USER root
 
+RUN apt install -y python3-xmlsec
+
 COPY odoo_19.0+e.20260224.tar.gz /tmp/enterprise.tar.gz
 
 RUN rm -rf /opt/bitnami/odoo/lib/odoo/ \
