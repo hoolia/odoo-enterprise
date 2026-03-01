@@ -15,6 +15,8 @@ RUN pip3 install --no-cache-dir \
     phonenumbers \
     python-stdnum
 
+RUN /opt/bitnami/odoo/venv/bin/pip install --no-cache-dir xmlsec lxml --upgrade
+
 COPY odoo_19.0+e.20260224.tar.gz /tmp/enterprise.tar.gz
 
 RUN rm -rf /opt/bitnami/odoo/lib/odoo/ \
