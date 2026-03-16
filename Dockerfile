@@ -13,7 +13,8 @@ RUN install_packages build-essential pkg-config libxmlsec1-dev libxmlsec1-openss
 RUN pip3 install --no-cache-dir \
     xmlsec \
     phonenumbers \
-    python-stdnum
+    python-stdnum \
+    pdfminer.six
 
 RUN /opt/bitnami/odoo/venv/bin/pip install --no-cache-dir xmlsec lxml --upgrade
 
